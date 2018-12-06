@@ -1,5 +1,47 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+The App has been deployed via heroku, here is the demo: https://thawing-earth-47588.herokuapp.com/
+
+## note:
+
+  Search users result is only showing the first 30 users so please be specific on on search terms.
+  Number of Repos: it shows users with public repos of more than userinput (for example: if you enter 0, it will show result of users with more than 0 repo)
+
+  Number of Followers: it shows users with followers of more than userinput (for example: if you enter 0, it will show result of users with more than 0 follower)
+  
+  ## To run the app locally
+  Simply clone/download the repo
+  Once you have the code on your computer,cd to the app and run:
+  ### `npm start`
+
+## There is a 60 requests/hour rate limit on the fetch request if you don't have a authorization.
+## Let's use a token to get up to 5000reuqest/hour
+If you already have a personal token that you've been using to make API requests, you can keep using that one. Otherwise, you'll need to generate a new one.
+
+To start, go to [github.com/settings/tokens](https://github.com/settings/tokens) and click "Generate new token." Name it something like "test the app", and check `repo` scope. Once you generate the token, make sure to copy and paste it somewhere, because once you leave that page, you won't be able to see it again.
+
+Using the token to [access the API](https://developer.github.com/apps/building-integrations/setting-up-and-registering-oauth-apps/about-authorization-options-for-oauth-apps/#3-use-the-access-token-to-access-the-api) is a simple matter of creating an `Authorization` header with our request.
+
+We need to provide our authorization token in order to list our own repositories with this API, so let's add our `Authorization` header (don't forget to assign your token to `const token`).
+
+You can simply open your chrome console and run the following scripts:
+
+```js
+const token = 'YOUR_TOKEN_HERE';
+
+fetch('https://api.github.com/users/steven0608', {
+  headers: {
+    Authorization: `token ${token}`
+  }
+}).then(res => res.json()).then(json => console.log(json));
+```
+
+## once you used the token, now you upgrade the rate limit!
+
+
+
+
+
 ## Available Scripts
 
 In the project directory, you can run:
