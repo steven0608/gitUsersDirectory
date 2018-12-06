@@ -1,7 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 The App has been deployed via heroku, here is the demo: https://thawing-earth-47588.herokuapp.com/
+
 ##note:
+
   Search users result is only showing the first 30 users so please be specific on on search terms.
   Number of Repos: it shows users with public repos of more than userinput (for example: if you enter 0, it will show result of users with more than 0 repo)
 
