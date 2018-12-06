@@ -223,3 +223,29 @@ input.searchbutton:hover{
 /* form {
     display: inline-block;
 } */
+
+
+@media only screen and (max-width: 532px) {
+  label,input{
+		display: block;
+		width: 100%;
+	}
+	input.searchbutton{
+		width: 100%;
+		display: block;
+	}
+
+	span.backToMainList{
+		width: 100%;
+		display: block;
+	}
+	.half{
+		width: 30%;
+	}
+	.half.container {
+		width: 68%;
+	}
+	.half>.ui.six.doubling.cards>.card{
+		width: 100%;
+	}
+}
