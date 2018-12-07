@@ -9,13 +9,19 @@ const UserList =(props) => {
 
 
     function handleUserslist(data) {
+      const API_KEY =`${process.env.REACT_APP_API_KEY_YT}`
+      const configSubmit = {
+          headers: {
+      Authorization: `token ${API_KEY}`
+    }
+  }
       if (!!data.message) {
         props.hasUserListFetchError()
         props.handleUserListFetchError(data.message)
       } else {
         props.noUserListFetchError()
         return data.forEach(user=>{
-        fetch(user.url).then(r=>r.json()).then(data=>props.fetchUsers(data)).catch(data=>console.log(data))
+        fetch(user.url,configSubmit).then(r=>r.json()).then(data=>props.fetchUsers(data)).catch(data=>console.log(data))
       })
       }
     }
@@ -27,7 +33,15 @@ const UserList =(props) => {
       console.log(nextNum)
       console.log("next Page", nextPage)
       const url = `https://api.github.com/users?since=${nextNum}`
-      fetch(url).then(r=>r.json()).then(data=>handleUserslist(data))
+
+      const API_KEY =`${process.env.REACT_APP_API_KEY_YT}`
+      const configSubmit = {
+          headers: {
+      Authorization: `token ${API_KEY}`
+    }
+  }
+
+      fetch(url, configSubmit).then(r=>r.json()).then(data=>handleUserslist(data))
       props.updateUserCurrentPage(nextPage)
     }
 
@@ -36,7 +50,15 @@ const UserList =(props) => {
           const prevPage = props.currentUserPage -1
           const nextNum = (prevPage-1)*30
           const url = `https://api.github.com/users?since=${nextNum}`
-          fetch(url).then(r=>r.json()).then(data=>handleUserslist(data))
+
+          const API_KEY =`${process.env.REACT_APP_API_KEY_YT}`
+          const configSubmit = {
+              headers: {
+          Authorization: `token ${API_KEY}`
+        }
+      }
+
+          fetch(url, configSubmit).then(r=>r.json()).then(data=>handleUserslist(data))
           props.updateUserCurrentPage(prevPage)
         }
     }

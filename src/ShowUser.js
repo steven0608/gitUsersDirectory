@@ -14,8 +14,14 @@ const ShowUser=(props) => {
 
     // "https://api.github.com/users/steven0608/repos?page=1&per_page=100"
     const url = `https://api.github.com/users/${props.user.login}/repos?page=1&per_page=20`
+    const API_KEY =`${process.env.REACT_APP_API_KEY_YT}`
+    const configSubmit = {
+        headers: {
+    Authorization: `token ${API_KEY}`
+  }
+}
     // console.log(url)
-    fetch(url).then(r=>r.json()).then(data=>props.getRepos(data)).catch(data=>console.log(data))
+    fetch(url, configSubmit).then(r=>r.json()).then(data=>props.getRepos(data)).catch(data=>console.log(data))
   }
 
   return(<Fragment>

@@ -17,9 +17,15 @@ const RepoList =(props) => {
 
 
   function handleNextPageClick(){
+    const API_KEY =`${process.env.REACT_APP_API_KEY_YT}`
+    const configSubmit = {
+        headers: {
+    Authorization: `token ${API_KEY}`
+  }
+}
     const nextPage = props.currentRepoPage + 1
     const url = `https://api.github.com/users/${props.selectedUser}/repos?page=${nextPage}&per_page=20`
-    fetch(url).then(r=>r.json()).then(data=>handleRepolist(data))
+    fetch(url,configSubmit).then(r=>r.json()).then(data=>handleRepolist(data))
     props.updateCurrentRepopage(nextPage)
   }
 
@@ -30,9 +36,15 @@ const RepoList =(props) => {
       props.noMoreRepo()
     }
     if (props.currentRepoPage>1) {
+      const API_KEY =`${process.env.REACT_APP_API_KEY_YT}`
+      const configSubmit = {
+          headers: {
+      Authorization: `token ${API_KEY}`
+    }
+  }
       const prevPage = props.currentRepoPage - 1
       const url = `https://api.github.com/users/${props.selectedUser}/repos?page=${prevPage}&per_page=20`
-      fetch(url).then(r=>r.json()).then(data=>props.updateRepoList(data))
+      fetch(url,configSubmit).then(r=>r.json()).then(data=>props.updateRepoList(data))
       props.updateCurrentRepopage(prevPage)
     }
   }

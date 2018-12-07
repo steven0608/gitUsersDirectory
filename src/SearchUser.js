@@ -11,13 +11,21 @@ const SearchUser =(props) => {
   }
 
   function handleSearchResult(data) {
+    const API_KEY =`${process.env.REACT_APP_API_KEY_YT}`
+    const configSubmit = {
+        headers: {
+    Authorization: `token ${API_KEY}`
+  }
+}
+
     if (!!data.message ||data.items.length===0) {
         props.hasUserListFetchError()
         props.handleUserListFetchError("No Result found, please try again")
     } else {
         props.noUserListFetchError()
         data.items.forEach(user=>{
-          fetch(user.url).then(r=>r.json()).then(data=>props.fetchSearchUsers(data)).catch(data=>console.log(data))
+          // console.log("checking Search User",configSubmit)
+          fetch(user.url,configSubmit).then(r=>r.json()).then(data=>props.fetchSearchUsers(data)).catch(data=>console.log(data))
         })
     }
   }
@@ -28,8 +36,16 @@ const SearchUser =(props) => {
       props.showSearchUserOuput()
       const username=encodeURIComponent(props.userNameInput.trim())
       const location = encodeURIComponent(props.locationInput.trim())
+
+      const API_KEY =`${process.env.REACT_APP_API_KEY_YT}`
+      const configSubmit = {
+          headers: {
+      Authorization: `token ${API_KEY}`
+    }
+  }
+
       const url=`https://api.github.com/search/users?q=${username}+repos:%3E${props.numberOfReposInput}+followers:%3E${props.numberOfFollowersInput}+location:%22${location}%22`
-      fetch(url).then(r=>r.json()).then(data=>handleSearchResult(data)).catch(data=>console.log(data))
+      fetch(url, configSubmit).then(r=>r.json()).then(data=>handleSearchResult(data)).catch(data=>console.log(data))
   }
 
   return(<div className="searchform">

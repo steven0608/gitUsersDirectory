@@ -8,21 +8,33 @@ import RepoList from "./RepoList"
 class App extends Component {
 
   getUserData=(userlist)=>{
+    const API_KEY =`${process.env.REACT_APP_API_KEY_YT}`
+    const configSubmit = {
+        headers: {
+    Authorization: `token ${API_KEY}`
+  }
+}
     if (!!userlist.message) {
         this.props.hasUserListFetchError()
         this.props.handleUserListFetchError(userlist.message)
     }else {
       this.props.noUserListFetchError()
       return userlist.forEach(user=>{
-        fetch(user.url).then(r=>r.json()).then(data=>this.props.fetchUsers(data)).catch(data=>console.log(data))
+        fetch(user.url,configSubmit).then(r=>r.json()).then(data=>this.props.fetchUsers(data)).catch(data=>console.log(data))
       })
     }
 
   }
 
   componentDidMount(){
+    const API_KEY =`${process.env.REACT_APP_API_KEY_YT}`
+    const configSubmit = {
+        headers: {
+    Authorization: `token ${API_KEY}`
+  }
+}
     const url = "https://api.github.com/users?since=0"
-    fetch(url).then(r=>r.json()).then(userlist=>this.getUserData(userlist))
+    fetch(url,configSubmit).then(r=>r.json()).then(userlist=>this.getUserData(userlist))
   }
 
   handleClickToClose = ()=>{
