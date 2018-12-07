@@ -22,21 +22,13 @@ To start, go to [github.com/settings/tokens](https://github.com/settings/tokens)
 
 Using the token to [access the API](https://developer.github.com/apps/building-integrations/setting-up-and-registering-oauth-apps/about-authorization-options-for-oauth-apps/#3-use-the-access-token-to-access-the-api) is a simple matter of creating an `Authorization` header with our request.
 
-We need to provide our authorization token in order to list our own repositories with this API, so let's add our `Authorization` header (don't forget to assign your token to `const token`).
-
-You can simply open your chrome console and run the following scripts:
+Create a new file called .env outside of the SRC folder, and enter your token :
 
 ```js
-const token = 'YOUR_TOKEN_HERE';
-
-fetch('https://api.github.com/users/steven0608', {
-  headers: {
-    Authorization: `token ${token}`
-  }
-}).then(res => res.json()).then(json => console.log(json));
+REACT_APP_API_KEY_YT ="token"
 ```
 
-## once you used the token, now you upgrade the rate limit!
+## once you used the token, now you upgrade the rate limit! 
 
 
 
