@@ -9,13 +9,11 @@ class App extends Component {
 
   getUserData=(userlist)=>{
     const API_KEY =`${process.env.REACT_APP_API_KEY_YT}`
-    console.log("API_key",API_KEY)
     const configSubmit = {
         headers: {
     Authorization: `token ${API_KEY}`
   }
-}
-  console.log()
+
     if (!!userlist.message) {
         this.props.hasUserListFetchError()
         this.props.handleUserListFetchError(userlist.message)
