@@ -13,6 +13,7 @@ class App extends Component {
         headers: {
     Authorization: `token ${API_KEY}`
   }
+}
 
     if (!!userlist.message) {
         this.props.hasUserListFetchError()
